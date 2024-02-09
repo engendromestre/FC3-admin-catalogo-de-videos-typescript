@@ -69,3 +69,48 @@
 - npm install @swc/core @swc/cli @swc/jest -D
 - npx jest --init
 - npm install ts-node --save-dev
+
+# Primeiros testes de Categoria
+
+- npm run test -- --watch (assiste se há mudança nos testes)
+
+- Cada teste pode ter subniveis e subsuites que envolve um grupo de testes
+
+# Sobre objetos de valores
+
+- Pensar a médio e longo prazo se os uuids estão usáveis e vamos falar nos objetos de valores que vão nos ajudar a abstrair esse tipo de comportamento dos IDs
+- Todos os outros campos da Entidade categoria podem mudar ao longo do tempo, somente a ID que não.
+- Lembrando que os objetos de valores vão nos ajudar a armazenar um valor específico, fazendo validações necessárias. Eles se diferenciam das Entidades pois são livres de efeitos colaterais e são imutáveis
+- Se você se dedicar mais a gerar objetos de valores você acaba gerando mais qualidade para a sua aplicação pois você pega aquele conjunto pequeno de regras em relação àquele valor e tira ela das entidades tornando aquilo reusável.
+- Então você usa os objetos de valor para escrever melhor aquele valor, retira responsabilidade da entidade, reusar entre entidades diferentes e assim por diante. 
+
+# Abstração objetos de valores
+- shared/domain/value-object.ts
+- install package lodash (lida com array, matrizes e objetos)
+  - npm install lodash
+  - npm install @types/lodash -D
+
+# Criando objeto de valor para uuid
+- na parte de crypto do nodejs
+- porém temos uma lib muito bem consolidade que é o uuid
+  - npm install uuid 
+  - npm install --save-dev @types/uuid
+
+- Tem uma parte do Clean Arquicture que o Uncle Bob fala da quebra parcial da arquitetura
+- Muitas vezes você não consegue uma arquitetura purista por várias questões de negócio
+- O Spy é um Mock, uma estrutura que a gente consegue controlar o comportamento dela
+
+# Sobre validação de entidades
+
+- Syntax validation: validar tipagem primitivas (string, number, null)
+- Retirar a responsabilidade da Entidade e criar uma para a validação
+- A classe precisa se auto-validar, porém ela não precisa prover a validação
+- Não vamos usar o validator-rules.ts
+- Vai se trabalhar com purismo de código tudo sem lib
+  - Não! Isso é um entedimento errado dos livros do Uncle Bob e dos livros de DDD também. Lá diz que você precisa usar as libs ao seu favor e de um modo que você consiga controlar o comportamento dela.
+- Vamos utilizar o classValidator, muito utlizado no Framework NestJS
+- npm install class-validator
+- Criar um arquivo para que o SWC trabalher com TS
+    - configurações .swcrc = compilar de um modo diferente com o SWC
+
+- npx tsc --noEmit (verifica se há algum erro de tipagem )
