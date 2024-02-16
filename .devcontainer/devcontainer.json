@@ -46,7 +46,10 @@
 		"vscode": {
 			"extensions": [
 				"Orta.vscode-jest",
-				"firsttris.vscode-jest-runner"
+				"firsttris.vscode-jest-runner",
+				"dbaeumer.vscode-eslint",
+                "esbenp.prettier-vscode",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	}
