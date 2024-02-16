@@ -114,3 +114,9 @@
     - configurações .swcrc = compilar de um modo diferente com o SWC
 
 - npx tsc --noEmit (verifica se há algum erro de tipagem )
+
+# Categoria - Repositório
+
+- Respositório tornou-se um conceito muito amplo. Ele é usado em diversos lugares e normalmente não significam a mesma coisa. Porém repositório tornou-se um conceito onde uma camada que vai lidar com uma entidade.
+- Os repositórios no DDD lidam com as entidades do DDD, ou seja, uma entidade que tem dados e comportamento, uma entidade que possua uma modelagem rica.
+- Os respositórios são criados a partir de agregado. Categoria é um agregado e tem-se um repositório para cada agregado. Para a entidade isolada a gente não tem.
