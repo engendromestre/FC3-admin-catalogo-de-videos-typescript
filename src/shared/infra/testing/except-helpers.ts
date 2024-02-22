@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ClassValidatorFields } from "../../validators/class-validator-fields";
-import { EntityValidationError } from "../../validators/validation.error";
-import { FieldsErrors } from "../../validators/validator-fields-interface";
+
+import { ClassValidatorFields } from "../../domain/validators/class-validator-fields";
+import { EntityValidationError } from "../../domain/validators/validation.error";
+import { FieldsErrors } from "../../domain/validators/validator-fields-interface";
 
 type Expected =
     | {

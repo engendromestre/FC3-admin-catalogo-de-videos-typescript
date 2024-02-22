@@ -119,4 +119,27 @@
 
 - Respositório tornou-se um conceito muito amplo. Ele é usado em diversos lugares e normalmente não significam a mesma coisa. Porém repositório tornou-se um conceito onde uma camada que vai lidar com uma entidade.
 - Os repositórios no DDD lidam com as entidades do DDD, ou seja, uma entidade que tem dados e comportamento, uma entidade que possua uma modelagem rica.
-- Os respositórios são criados a partir de agregado. Categoria é um agregado e tem-se um repositório para cada agregado. Para a entidade isolada a gente não tem.
+- Os respositórios são criados a partir de agregados. Categoria é um agregado e tem-se um repositório para cada agregado. Para a entidade isolada a gente não tem.
+- Primeiro cria-se uma interface (uma abistração ou contrato) pois não se sabe qual banco será implementado
+- Os repositórios estão preocupados apenas com Storage (Armazenamento) e não necessariamente armazenamento em banco de dados, pode ser em um arquivo do Excel por exemplo.
+
+# O que são test data builders
+
+- Entidade é algo que se utiliza em todo tipo de teste. Seja em testes unitários, end-to-end ou intergração, vai pegar uma entidade, criar uma instância para fazer algo. Nos testes unitários não está se preocupando inicialmente com regras de negócios, mas em instanciar uma classe, fazer um armazenamento ou filtragem, e, se a entidade é um pouco mais complexa, onde se recebe muita coisa no construtor ou em um factory fica muito contra-produtivo fazer os testes. Em muitas entidades o intuíto é somente gerar uma entidade válida. Então a repetição da criação de entidades vai dificultando os testes. 
+- Então é interessante ter uma forma de gerar essas entidades tirando essa preocupação dos testes e quando essas entidades mudarem e elas vão mudar, o impacto nos testes seja mínimo.
+- Vamos trabalhar então com um conceito chamado test data builders. Esse padrão foi proposto por Steve Freeman no seu livro Growing Object-Oriented Software, Guided By Tests. Ele não tem nada de novo, apenas o design pattern builder aplicado nas entidades. O Design Pattern Builder é um padrão criacional e usar isso diretamente nos testes livra o repositório fique se preocupando diretamente como usar as operações
+- npm i chance @types/chance --save-dev
+- Todo método with está usando um influent pattern para sempre fazer Entity.with.with ....
+
+# Sequelize
+
+- npm install sequelize sequelize-typescript
+- npm install @types/sequelize --save-dev
+- npm install sqlite3
+
+# Criando model de Categoria
+
+- criar a modelagem da categoria que vai representar a tabela do banco de dados dentro do projeto
+- depois é pegar o modelo e traduzir para a entidade
+
+
