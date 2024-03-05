@@ -142,4 +142,24 @@
 - criar a modelagem da categoria que vai representar a tabela do banco de dados dentro do projeto
 - depois é pegar o modelo e traduzir para a entidade
 
+# Criando mapeador para Categoria e o Model sequelize
 
+- Conversão que está sendo feita, tanto da entidade rica do DDD para o modelo do Sequelize e vice-versa.
+
+# Criando serviço de configuração para os testes
+
+- é insdispensável fazer configurações para permitir que por meio de variáveis de ambiente ou uma parte separada da aplicação consiga configurar qual será o banco de dados por exemplo. 
+- a aplicação deve estar presa a um serviço de configuração específico (fora dos testes por exemplo)
+- a variável de ambiente vai ser um modo onde vamos configurar esse serviço de configuração que vai espalhar esses serviços pela aplicação
+
+# Criando helper de testes para criar instância do Sequelize
+
+- uma pratica recomendada é criar helpers (funções que são chamadas dentro da aplicação). 
+- vão abstrair alguma necessidade da aplicação
+
+# Casos de Uso
+
+- casos de uso estão na camada de application, pois eles reunem a necessidade de fazer a operação, conectando o cliente (seja um usuário, um teste, etc.) com a camada mais importante que do domínio que são as entidades. 
+- as entidades por si só a gente chama de regras independentes de negócio, sozinhas elas não existem, elas precisam de uma acamada de aplicação (casos de uso)  que vão orquestrar o seu uso.
+
+- Fixtures: As fixtures são funções que fornecem dados ou objetos necessários para executar um teste. Elas ajudam a evitar repetições de código e tornam os testes mais legíveis e fáceis de entender. (Testes do caso de uso de edição da categoria)

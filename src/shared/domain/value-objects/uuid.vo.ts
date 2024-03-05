@@ -6,7 +6,7 @@ export class Uuid extends ValueObject {
 
 	constructor (id?: string) {
 		super();
-		this.id = id ?? uuidv4();
+		this.id = id || uuidv4();
 		this.validate();
 	}
 
