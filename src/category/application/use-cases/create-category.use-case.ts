@@ -9,7 +9,7 @@ export class CreateCategoryUseCase
 {
   constructor(private readonly categoryRepo: ICategoryRepository) {}
 
-  async execute(input: CreateCategoryOutput): Promise<CreateCategoryOutput> {
+  async execute(input: CreateCategoryInput): Promise<CreateCategoryOutput> {
     const entity = Category.create(input);
 
     await this.categoryRepo.insert(entity);
@@ -19,9 +19,10 @@ export class CreateCategoryUseCase
 }
 
 export type CreateCategoryInput = {
-    id: string;
+    id?: string;
     name: string;
-    description: string | null;
+    description?: string | null;
+    is_active?: boolean;
 }
 
 export type CreateCategoryOutput = CategoryOutput;

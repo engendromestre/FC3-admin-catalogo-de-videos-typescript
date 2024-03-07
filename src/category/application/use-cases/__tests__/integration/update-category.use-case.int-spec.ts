@@ -144,7 +144,6 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
     ];
 
     for (const i of arrange) {
-    // @ts-expect-error
       output = await useCase.execute({
         id: i.input.id,
         ...(i.input.name && { name: i.input.name }),

@@ -9,15 +9,15 @@ export class CategoryRules {
     @MaxLength(255)
     @IsString()
     @IsNotEmpty()
-    	name: string;
+        name!: string;
 
     @IsString()
     @IsOptional()
-    	description: string | null;
+    	description!: string | null;
 
     @IsBoolean()
     @IsNotEmpty()
-    	is_active: boolean;
+    	is_active!: boolean;
 
     constructor({ name, description, is_active }: Category) {
     	// "strictNullChecks": false,

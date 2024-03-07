@@ -12,11 +12,11 @@ export type SearchParamsConstructorProps<Filter = string> = {
 };
 
 export class SearchParams<Filter = string> extends ValueObject {
-    protected _page: number;
+    protected _page!: number;
     protected _per_page: number = 15;
-    protected _sort: string | null;
-    protected _sort_dir: SortDirection | null;
-    protected _filter: Filter | null;
+    protected _sort!: string | null;
+    protected _sort_dir!: SortDirection | null;
+    protected _filter!: Filter | null;
 
     constructor(props: SearchParamsConstructorProps<Filter> = {}) {
         super();
