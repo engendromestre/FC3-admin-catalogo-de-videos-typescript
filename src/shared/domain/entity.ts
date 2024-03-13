@@ -1,7 +1,10 @@
-import { ValueObject } from "./value-object";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Notification } from './validators/notification';
+import { ValueObject } from './value-object';
 
 export abstract class Entity {
-    abstract get entity_id(): ValueObject;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    abstract toJSON(): any;
+  notification: Notification = new Notification();
+
+  abstract get entity_id(): ValueObject;
+  abstract toJSON(): any;
 }

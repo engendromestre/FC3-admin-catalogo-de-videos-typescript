@@ -1,5 +1,4 @@
 import { Entity } from "../../shared/domain/entity";
-import { EntityValidationError } from "../../shared/domain/validators/validation.error";
 import { ValueObject } from "../../shared/domain/value-object";
 import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
 import { CategoryFakeBuilder } from "./category-fake.builder";
@@ -7,7 +6,7 @@ import { CategoryValidatorFactory } from "./category.validator";
 
 /* eslint-disable @typescript-eslint/unbound-method */
 export interface CategoryConstructorProps {
-	category_id?: Uuid
+	category_id?: CategoryId
 	name: string
 	description?: string | null
 	is_active?: boolean
@@ -20,8 +19,10 @@ export interface CategoryCreateCommand {
 	is_active?: boolean
 }
 
+export class CategoryId extends Uuid {}
+
 export class Category extends Entity {
-	category_id: Uuid;
+	category_id: CategoryId;
 	name: string;
 	description: string | null;
 	is_active: boolean;
@@ -33,7 +34,7 @@ export class Category extends Entity {
 
 	constructor(props: CategoryConstructorProps) {
 		super();
-		this.category_id = props.category_id ?? new Uuid();
+		this.category_id = props.category_id ?? new CategoryId();
 		this.name = props.name;
 		this.description = props.description ?? null; // coalesce operator
 		this.is_active = props.is_active ?? true;
@@ -43,18 +44,17 @@ export class Category extends Entity {
 	// factory method
 	static create(props: CategoryCreateCommand): Category {
 		const category = new Category(props);
-		Category.validate(category);
+		category.validate(['name']);
 		return category;
 	}
 
 	changeName(name: string): void {
 		this.name = name;
-		Category.validate(this);
+		this.validate(['name']);
 	}
 
 	changeDescription(description: string): void {
 		this.description = description;
-		Category.validate(this);
 	}
 
 	activate(): void {
@@ -65,20 +65,16 @@ export class Category extends Entity {
 		this.is_active = false;
 	}
 
-	static validate(entity: Category) {
+	validate(fields?: string[]) {
 		const validator = CategoryValidatorFactory.create();
-		const isValid = validator.validate(entity);
-		if (!isValid) {
-			// @ts-expect-error: Unreachable code error
-			throw new EntityValidationError(validator.errors);
-		}
+		return validator.validate(this.notification, this, fields);
 	}
 
 	static fake() {
 		return CategoryFakeBuilder;
 	}
 
-	toJSON(): object {
+	toJSON() {
 		return {
 			category_id: this.category_id.id,
 			name: this.name,

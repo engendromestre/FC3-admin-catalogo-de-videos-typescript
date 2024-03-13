@@ -163,3 +163,20 @@
 - as entidades por si só a gente chama de regras independentes de negócio, sozinhas elas não existem, elas precisam de uma acamada de aplicação (casos de uso)  que vão orquestrar o seu uso.
 
 - Fixtures: As fixtures são funções que fornecem dados ou objetos necessários para executar um teste. Elas ajudam a evitar repetições de código e tornam os testes mais legíveis e fáceis de entender. (Testes do caso de uso de edição da categoria)
+
+# Sobre a validação de sintaxe vs validação de domínio
+
+- Ao trabalhar com as métodologias de desenvolvimento como a Arquitetura Hexagonal, Clean Arquitecture, Domain-Driven Design, etc. é que o conceito de validação está presente em cada camada do software. Ele começa lá no front-end (sendo uma aplicação web ou não) e ao digitar um texto ou uma data já está sendo feito uma validação antes de submeter esses dados do formulário. Ao enviramos essa informação via verbo POST para um servidor WEB (vamos supor que seja um Nginx) ele vai validar se o nosso Body (corpo da mensagem enviada) não está excedendo o tamanho limite e outras validações acontecem e ai chega na nossa aplicação o JSON que estou recebendo da minha API REST também é validado, se ele está em um formato aceitável. Então vamos tendo uma sequência de validações até que se chega nessa camada de domínio e é processado o que é necessário.
+
+category.validator.ts
+- domain validations vs syntax validations
+- domain validations são as regras cruciais do negócio. Ex: O nome da categoria deve ter no máximo 255 caracteres. Se o cliente escolher um filme da categoria Promoção, descontar 10% do preço.
+- syntax validations são regras onde determinam se precisa ser um número, uma data, se pode ser ou não nula, etc.
+
+- Por enquanto estamos misturando as abordagem de domínio e de sintaxe. Porém qual é o problema disso? Vai acabar sobrecarregando o domínio com essas validações sendo que temos outras camadas externas desse software que vão acabar usando a nossa camada de aplicação, como os controladores que vão usar os nossos casos de uso.
+
+# Sobre o lançamento de exceções do validar entidades
+
+- por enquanto toda vez que a categoria é invalidada, nós lançamos uma exceção. No exemplo do create e update category use-case, ficar usando o bloco try/catch geraria um tremendo code smell.  No caso do update, lançar uma exceção diretamente tem uma consequência para o nosso código. É melhor retornar todo os histórico de problemas do que um a um.
+- então nesse caso é melhor trabalhar com um padrão conhecido como notification pattern onde eu consigo chegar em cada método. 
+- Ter na camada de aplicação a possibilidade de orquestrar o lançamento de exceções é melhor do que deixar a entidade sendo impositiva.

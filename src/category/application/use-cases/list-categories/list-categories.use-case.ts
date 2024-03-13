@@ -1,8 +1,8 @@
-import { PaginationOutput, PaginationOutputMapper } from "../../../shared/application/pagination-output";
-import { IUseCase } from "../../../shared/application/use-case.interface";
-import { SortDirection } from "../../../shared/domain/repository/search-params";
-import { ICategoryRepository, CategorySearchParams, CategoryFilter, CategorySearchResult } from "../../domain/category.respository";
-import { CategoryOutput, CategoryOutputMapper } from "./common/category-output";
+import { PaginationOutput, PaginationOutputMapper } from "../../../../shared/application/pagination-output";
+import { IUseCase } from "../../../../shared/application/use-case.interface";
+import { SortDirection } from "../../../../shared/domain/repository/search-params";
+import { ICategoryRepository, CategorySearchParams, CategoryFilter, CategorySearchResult } from "../../../domain/category.respository";
+import { CategoryOutput, CategoryOutputMapper } from "../common/category-output";
 
 export class ListCategoriesUseCase
     implements IUseCase<ListCategoriesInput, ListCategoriesOutput>
@@ -18,10 +18,10 @@ export class ListCategoriesUseCase
     private toOutput(searchResult: CategorySearchResult): ListCategoriesOutput {
         const { items: _items } = searchResult;
         const items = _items.map((i) => {
-          return CategoryOutputMapper.toOutput(i);
+            return CategoryOutputMapper.toOutput(i);
         });
         return PaginationOutputMapper.toOutput(items, searchResult);
-      }
+    }
 }
 
 export type ListCategoriesInput = {
